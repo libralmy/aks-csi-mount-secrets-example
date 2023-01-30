@@ -52,4 +52,3 @@ az identity federated-credential create \
 
 sleep 30
 echo "should be ready to go... check with kubectl get secretproviderclass -n ${SERVICE_ACCOUNT_NAMESPACE} -o yaml"
-

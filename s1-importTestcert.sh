@@ -7,7 +7,7 @@ set -o allexport; source .env; set +o allexport
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -out aks-ingress-tls.crt \
     -keyout aks-ingress-tls.key \
-    -subj "/CN=demo.azure.com/O=aks-ingress-tls"
+    -subj "/CN=aks-app-05.eastus.cloudapp.azure.com/O=aks-ingress-tls"
 
 echo "hit enter to continue -- to skip password prompt"
 openssl pkcs12 -export -in aks-ingress-tls.crt -inkey aks-ingress-tls.key  -out $CERT_NAME.pfx

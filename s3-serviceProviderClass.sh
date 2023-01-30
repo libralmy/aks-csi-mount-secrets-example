@@ -128,10 +128,10 @@ cat <<EOF | kubectl apply -f -
 kind: Pod
 apiVersion: v1
 metadata:
-  name: busybox-secrets-store-keys-workload-identity
+  name: quick-start-busybox-secrets-store
   namespace: ${SERVICE_ACCOUNT_NAMESPACE}
   labels:
-    azure.workload.identity/use: "true
+    azure.workload.identity/use: "true"
 spec:
   serviceAccountName: ${SERVICE_ACCOUNT_NAME}
   containers:
@@ -152,3 +152,4 @@ spec:
         volumeAttributes:
           secretProviderClass: "azure-tls-keys"
 EOF
+
