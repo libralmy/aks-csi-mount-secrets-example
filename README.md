@@ -29,15 +29,32 @@ $ sudo apt-get install jq
 ```sh
 ./s3-serviceProviderClass.sh
 ```
-
+Verify the secret and cert through the test pod
 ```sh
 kubectl exec <pod name> -- ls <mnt path>
 #kubectl exec busybox-secrets-store-inline-workload-identity -- ls /mnt/secrets-store/
 kubectl exec <pod name>  -- cat <mnt path>/<secret/cert name>
 #kubectl exec busybox-secrets-store-inline-workload-identity -- cat /mnt/secrets-store/secret1
 ```
-azure-tls-keys
 
+### Install ingress-nginx controller with config. We use the secretproviderclass azure-tls-keys as example 
+```sh
+./s4-installingress-nginx.sh
+```
+You can verify the ingress controller status through portal or run the command 
+```sh
+kubectl get pods --all-namespaces 
+```
+
+### Deploy the hello-world-ingress.yaml to access test App helloworldone and  helloworldone with cert
+```sh
+./s5-deployTestPods.sh
+```
+
+### Generate publicIP and validate cert 
+```sh
+./s6-validation.sh
+```
 
 ```sh
 az aks update -n myAKSCluster -g myResourceGroup --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys
