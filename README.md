@@ -1,30 +1,44 @@
-# publicAKSwithAKV-CSIDriver
+# Set up Secrets Store CSI Driver to enable NGINX Ingress in AKS
+## References 
+[Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#upgrade-an-existing-aks-cluster-with-azure-key-vault-provider-for-secrets-store-csi-driver-support)
+[Provide an identity to access the Azure Key Vault Provider for Secrets Store CSI Driver](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-identity-access)
+[Set up Secrets Store CSI Driver to enable NGINX Ingress Controller with TLS](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-nginx-tls)
+
+## Prerequisites
+1. Azure Subscription 
+2. Fill up all variables in sample.env file
+3. Run the following command to install jq on Ubuntu.
 ```sh
-az group create -n myResourceGroup -l eastus
-
-az aks create -n myAKSCluster -g myResourceGroup --enable-addons azure-keyvault-secrets-provider --enable-managed-identity
-
-az account set --subscription 89a596f0-5a62-4e8d-8c80-6b396faa037c
-
-az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
-
-kubectl get pods --all-namespaces=true
-
-kubectl get pods -n kube-system -l 'app in (secrets-store-csi-driver, secrets-store-provider-azure)'
-
-az keyvault create -n kv20230124 -g myResourceGroup -l eastus
+$ sudo apt-get install jq
 ```
-## Your Azure key vault can store keys, secrets, and certificates. In this example, you'll set a plain-text secret called ExampleSecret
+
+### Enable Workload Identity preview and setup Key Vault 
 ```sh
-az keyvault secret set --vault-name kv20230124 -n ExampleSecret --value MyAKSExampleSecret
+./s0-enablePreview-AKVpolicy.sh
 ```
-## Create workload identity
+### Import the test certificate 
 ```sh
-az extension add --name aks-preview
-az extension update --name aks-preview
-az feature register --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
-az provider register --namespace Microsoft.ContainerService
+./s1-importTestcert.sh
 ```
+### Create AKS with service account and federated identity 
+```sh
+./s2-createAKSwithIdentity.sh
+```
+
+### Create serviceproviderclass and the pods to test cert and secret
+```sh
+./s3-serviceProviderClass.sh
+```
+
+```sh
+kubectl exec <pod name> -- ls <mnt path>
+#kubectl exec busybox-secrets-store-inline-workload-identity -- ls /mnt/secrets-store/
+kubectl exec <pod name>  -- cat <mnt path>/<secret/cert name>
+#kubectl exec busybox-secrets-store-inline-workload-identity -- cat /mnt/secrets-store/secret1
+```
+azure-tls-keys
+
+
 ```sh
 az aks update -n myAKSCluster -g myResourceGroup --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys
 ```
