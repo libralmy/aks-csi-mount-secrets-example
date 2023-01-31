@@ -1,10 +1,5 @@
 # Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster
-## References 
-[Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#upgrade-an-existing-aks-cluster-with-azure-key-vault-provider-for-secrets-store-csi-driver-support)
-
-[Provide an identity to access the Azure Key Vault Provider for Secrets Store CSI Driver](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-identity-access)
-
-[Set up Secrets Store CSI Driver to enable NGINX Ingress Controller with TLS](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-nginx-tls)
+Azure Key Vault provider for Secrets Store CSI driver allows you to get secret contents stored in Azure Key Vault instance and use the Secrets Store CSI driver interface to mount them into Kubernetes pods.
 
 ## Prerequisites
 1. Azure Subscription 
@@ -58,3 +53,23 @@ kubectl get pods --all-namespaces
 ```sh
 ./s6-validation.sh
 ```
+
+
+## References 
+[Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#upgrade-an-existing-aks-cluster-with-azure-key-vault-provider-for-secrets-store-csi-driver-support)
+
+[Provide an identity to access the Azure Key Vault Provider for Secrets Store CSI Driver](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-identity-access)
+
+[Set up Secrets Store CSI Driver to enable NGINX Ingress Controller with TLS](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-nginx-tls)
+
+[ingress-nginx repo](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx)
+Chart version 3.x.x: Kubernetes v1.16+
+Chart version 4.x.x and above: Kubernetes v1.19+
+
+[ingress-nginx helper repo](https://github.dev/kubernetes/ingress-nginx/blob/5628f765fe883dd8c13ccd3084e9003ffd3e28d5/charts/ingress-nginx/templates/_helpers.tpl#L152)
+
+[ingress-nginx yaml file](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/Chart.yaml)
+
+[Docer-Kubernets-course](https://github.dev/HoussemDellai/docker-kubernetes-course)
+
+[Azure secrets-store-csi-driver-provider-azure/charts](https://github.com/Azure/secrets-store-csi-driver-provider-azure/tree/04c1fae211b522a84a7818cac7b7daaef1ca9ef2/charts/csi-secrets-store-provider-azure)

@@ -1,4 +1,5 @@
-## Use az command to Set up Secrets Store CSI Driver to enable NGINX Ingress Controller with TLS
+# Use az command to Set up Secrets Store CSI Driver to enable NGINX Ingress Controller with TLS
+
 ```sh
 export SUBSCRIPTION=<<<<your subscription id>>>>> # your subscription id
 export RESOURCEGROUPNAME=csiResourceGroupSecond
