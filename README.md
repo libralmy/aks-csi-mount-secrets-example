@@ -45,6 +45,7 @@ You can verify the ingress controller status through portal or run the command
 ```sh
 kubectl get pods --all-namespaces 
 ```
+![image](https://user-images.githubusercontent.com/20976896/215640332-f4fe3165-ac72-4cef-95ad-e1af539c0190.png)
 
 ### Deploy the hello-world-ingress.yaml to access test App helloworldone and  helloworldone with cert
 ```sh
