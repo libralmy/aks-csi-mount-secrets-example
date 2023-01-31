@@ -34,9 +34,7 @@ az extension add --name aks-preview
 az extension update --name aks-preview
 az feature register --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
 # wait till registered
-#az feature show --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
-wait_for_output "az feature show --namespace Microsoft.ContainerService --name EnableWorkloadIdentityPreview | jq -r .properties.state" "Registered"
-
+az feature show --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
 # when done
 az provider register --namespace Microsoft.ContainerService
 ```
