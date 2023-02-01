@@ -92,7 +92,7 @@ metadata:
   labels:
     azure.workload.identity/use: "true"
 spec:
-  ingressClassName: $INGRESS_CLASS_NAME # nginx
+  ingressClassName: $INGRESS_CLASS_NAME 
   tls:
   - hosts:
     - $DOMAIN_NAME_FQDN
